@@ -29,12 +29,12 @@ function Nav() {
               </a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" id="/projects" href="/projects">
+              <a class="nav-link" id="/projects/" href="/projects/">
                 Projects
               </a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" id="/cv" href="/cv">
+              <a class="nav-link" id="/cv/" href="/cv/">
                 CV
               </a>
             </li>
