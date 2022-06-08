@@ -11,7 +11,7 @@ function MainProject({ myProject }) {
           <p class="project__description--para">{ myProject.description }</p>
           <div class="project__description--links">
             <a
-              href={ myProject.github }
+              href={ myProject.githubUrl }
               rel="noreferrer"
               target="_blank"
               class="project__description--link"
