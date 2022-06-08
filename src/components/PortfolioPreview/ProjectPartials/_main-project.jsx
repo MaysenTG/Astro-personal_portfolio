@@ -1,5 +1,6 @@
+import '../projectStyles.css';
+
 function MainProject({ myProject }) {
-  console.log(myProject)
   return (
     <li key="" class="project">
       <div class="project__wrapper">

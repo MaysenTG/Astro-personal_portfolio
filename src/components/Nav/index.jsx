@@ -1,11 +1,10 @@
 import { h } from "preact";
-import Styles from "./styles.module.scss";
 
 function Nav() {
   return (
     <nav
       class="navbar navbar-expand-lg navbar-dark"
-      style="background: linear-gradient(120deg,#7f70f5,#0ea0ff); color: #fff; padding: 20px"
+      style="background: linear-gradient(120deg,#7f70f5,#0ea0ff); color: #fff; padding: 20px; font-size: 18px;"
     >
       <div class="container-fluid">
         <a class="navbar-brand" href="/">

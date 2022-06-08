@@ -9,7 +9,6 @@ function ProjectBase({ myProjects }) {
             { myProjects.map((project,i) => 
                 <MainProject myProject={project} />
             )}
-            
           </ul>
         </div>
       </div>

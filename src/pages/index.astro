@@ -1,10 +1,9 @@
 ---
 // Component Imports
 import MainHead from '../components/MainHead.astro';
-import Button from '../components/Button/index.jsx';
 import Nav from '../components/Nav/index.jsx';
 import Footer from '../components/Footer/index.jsx';
-import PortfolioPreview from '../components/PortfolioPreview/index.jsx';
+import Skills from '../components/HomepageSkills/_skills.jsx';
 
 const response = await fetch("https://api-ap-southeast-2.graphcms.com/v2/cl2wglc9d1y0s01yw6cx0fc4n/master",
 	{
@@ -13,19 +12,13 @@ const response = await fetch("https://api-ap-southeast-2.graphcms.com/v2/cl2wglc
 		body: JSON.stringify({
 			query: `
 			query MyQuery {
-				project(where: {featuredProject: true}) {
-					title
-					githubUrl
-					description
-					previewUrl
-					skills
-					projectImage {
-						url
-					}
-				}
 				homepages {
 					buttonLabel
 					subText
+				}
+				aboutMes {
+					skillTitles
+					skillDescriptions
 				}
 			}
       `
@@ -33,19 +26,16 @@ const response = await fetch("https://api-ap-southeast-2.graphcms.com/v2/cl2wglc
 	})
 
 const json = await response.json();
-const featuredProject = json.data["project"];
 const homePageInfo = json.data["homepages"][0];
-//console.log(homePageInfo);
+const aboutMeInfoSkillTitles = json.data["aboutMes"][0].skillTitles;
+const aboutMeInfoSkillDesc = json.data["aboutMes"][0].skillDescriptions;
 
-
-// Full Astro Component Syntax:
-// https://docs.astro.build/core-concepts/astro-components/
 ---
 
 <html lang="en">
 
 <head>
-	<MainHead title="Jeanine White: Personal Site" description="Jeanine White: Developer, Speaker, and Writer..." />
+	<MainHead title="Maysen Greenwood - Home" description="Maysen Greenwood, front-end developer" />
 	<style lang="scss">
 		$w-s: 750px;
 
@@ -222,10 +212,9 @@ const homePageInfo = json.data["homepages"][0];
 					<img src="https://ik.imagekit.io/maysentg/tr:w-200,h-200/self-portrait.jpg"
 						style='margin-top: -2rem; border-radius: 100%'
 						alt="self portrait of Maysen Greenwood, owner/developer of this website">
-					<p class="lead mt-2"></p>
+					<p class="lead mt-2">{ homePageInfo.subText }</p>
 					<p>
-						<a href="/projects"
-							class="btn btn-primary my-2"></a>
+						<a href="/projects" class="btn btn-primary my-2">{ homePageInfo.buttonLabel }</a>
 					</p>
 				</div>
 			</div>
@@ -236,6 +225,9 @@ const homePageInfo = json.data["homepages"][0];
 					<h2 class="text-center mb-5">Skills</h2>
 				</div>
 				<div class="row">
+					<Skills skillTitle={aboutMeInfoSkillTitles[0]} skillDescription={aboutMeInfoSkillDesc[0]} skillIcon={"https://ik.imagekit.io/maysentg/star-icon.webp"} />
+					<Skills skillTitle={aboutMeInfoSkillTitles[1]} skillDescription={aboutMeInfoSkillDesc[1]} skillIcon={"https://ik.imagekit.io/maysentg/light-icon.webp"} />
+					<Skills skillTitle={aboutMeInfoSkillTitles[2]} skillDescription={aboutMeInfoSkillDesc[2]} skillIcon={"https://ik.imagekit.io/maysentg/settings-icon.webp"} />
 				</div>
 			</div>
 		</section>
