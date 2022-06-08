@@ -215,40 +215,30 @@ const homePageInfo = json.data["homepages"][0];
 
 <body>
 	<Nav />
-	<header class="hero">
-		<img class="img" src="https://ik.imagekit.io/maysentg/tr:w-00/portfolio-hero.jpeg" />
-		<div class="gradient"></div>
-		<div class="gradient2"></div>
-		<div class="overlay">
-			<h1 class="title">
-				<small class="subtitle">The personal site of </small> Maysen
-			</h1>
-			<div>
-				<a href="/projects"><span class="role">👩‍💻 { homePageInfo.buttonLabel } <span class="invert">👩‍💻 { homePageInfo.buttonLabel }</span></span>&nbsp;</a>
-			</div>
-		</div>
-	</header>
-	<main class="wrapper mt4 mb4">
-		<div class="grid">
-			<div class="section">
-				<h3 class="sectionTitle">Featured Project</h3>
-				<PortfolioPreview project={featuredProject} />
-				<div class="tac mt4">
-					<a href="/projects">
-						<Button>View All</Button>
-					</a>
+	<main>
+		<section class="py-5 text-center container">
+			<div class="row py-lg-5">
+				<div class="col-lg-6 col-md-8 mx-auto">
+					<img src="https://ik.imagekit.io/maysentg/tr:w-200,h-200/self-portrait.jpg"
+						style='margin-top: -2rem; border-radius: 100%'
+						alt="self portrait of Maysen Greenwood, owner/developer of this website">
+					<p class="lead mt-2"></p>
+					<p>
+						<a href="/projects"
+							class="btn btn-primary my-2"></a>
+					</p>
 				</div>
 			</div>
-			<div class="section">
-				<h3 class="sectionTitle">About me</h3>
-				<p class="bio">
-					<span>Hello!</span> { homePageInfo.subText }
-				</p>
-				<p>
-					<a href="/about">Read more</a>
-				</p>
+		</section>
+		<section class="portfolio-block skills" style="margin-top: -3rem;">
+			<div class="container">
+				<div class="heading">
+					<h2 class="text-center mb-5">Skills</h2>
+				</div>
+				<div class="row">
+				</div>
 			</div>
-		</div>
+		</section>
 	</main>
 	<Footer />
 </body>
