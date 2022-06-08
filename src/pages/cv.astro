@@ -2,45 +2,113 @@
 import MainHead from '../components/MainHead.astro';
 import Footer from '../components/Footer/index.jsx';
 import Nav from '../components/Nav/index.jsx';
-import ProjectBase from '../components/PortfolioPreview/ProjectPartials/_project-base';
+import WorkCV from '../components/CV/_work.jsx';
+import EducationCV from '../components/CV/_education.jsx';
+
 
 const response = await fetch("https://api-ap-southeast-2.graphcms.com/v2/cl2wglc9d1y0s01yw6cx0fc4n/master",
-	{
-		method: 'POST',
-		headers: { 'Content-Type': 'application/json' },
-		body: JSON.stringify({
-			query: `
-			query MyQuery {
-				projects(where: {projectType: "website"}) {
-					id
-					skills
-					title
-					description
-					githubUrl
-					previewUrl
-					projectImage {
-						fileName
-					}
-				}
-			}
+  {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({
+      query: `
+        query MyQuery {
+          works(orderBy: createdAt_DESC) {
+            location
+            position
+            tenure
+            title
+            description
+          }
+          educations(orderBy: createdAt_DESC) {
+            tenure
+            location
+            description
+          }
+        }
       `
-		})
-	})
+    })
+  })
 
 const json = await response.json();
-const myprojects = json.data["projects"];
+const workCV = json.data.works;
+const eduCV = json.data.educations;
 ---
 
 <html lang="en">
 
 <head>
-	<MainHead title="All Projects | Maysen Greenwood" description="Learn about Maysen Greenwoods projects" />
+  <MainHead title="All Projects | Maysen Greenwood" description="Learn about Maysen Greenwoods projects" />
+  <style lang="css">
+    .timing {
+      font-size: 0.75rem;
+    }
+
+    .organization {
+      font-size: 1rem;
+    }
+
+    .title-tenure {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .organization {
+      font-size: 0.8rem;
+      display: inline-block;
+      color: white !important;
+      padding: 2px 8px;
+      border-radius: 2em;
+    }
+
+    .text-muted {
+      font-size: 0.9rem;
+    }
+    #tenure {
+      float: right;
+    }
+    
+    @media screen and (max-width: 1000px) {
+      #tenure {
+        float: left !important;
+      }
+    }
+  </style>
 </head>
 
 <body>
-	<Nav />
+  <Nav />
+  <main class="page cv-page mt-5">
+    <section class="portfolio-block cv">
+      <div class="container">
+        <div class="work-experience group">
+          <div class="heading">
+            <h2 class="text-center">Work Experience</h2>
+          </div>
+          <br />
 
-	<Footer />
+          { workCV.map((work) => (
+          <WorkCV workData={work} />
+          ))}
+
+        </div>
+        <br />
+        <div class="education group">
+          <div class="heading">
+            <h2 class="text-center">Education</h2>
+          </div>
+          <br />
+
+          { eduCV.map((edu) => (
+            <EducationCV educationData={edu} />
+            ))}
+
+        </div>
+      </div>
+    </section>
+  </main>
+  <Footer />
 </body>
 
 </html>
